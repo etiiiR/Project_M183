@@ -14,7 +14,11 @@ from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from ipware import get_client_ip
-
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from .forms import sendmoneytofriend
+from django.views.generic.edit import FormView
 
 @method_decorator(login_required, name='dispatch')
 class abheben(PermissionRequiredMixin, ListView):
@@ -50,4 +54,23 @@ class AccountCreate(PermissionRequiredMixin, CreateView):
     model = Bankaccoount
     fields = ['Money', 'User']
     logger.info("Account Created", fields)
-         
+
+@method_decorator(login_required, name='dispatch')
+class SignUp(PermissionRequiredMixin, generic.CreateView):
+    permission_required = 'bankaccount.can_bankeröffnung' 
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+@method_decorator(login_required, name='dispatch')
+class Friendspay(PermissionRequiredMixin, FormView):
+    permission_required = 'bankaccount.can_bankeröffnung' 
+    form_class = sendmoneytofriend
+    success_url = '/app/'
+    template_name = 'user_friendspay.html'
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super().form_valid(form)

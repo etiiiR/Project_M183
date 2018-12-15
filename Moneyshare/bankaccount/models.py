@@ -28,5 +28,3 @@ class Bankaccoount(models.Model):
             ("can_bankeröffnung", "Kann ein Bankacccount eröffnen"),
             ("can_payafriend", "Kann ein Geld an einen Freund senden")
         )
-        
-logger.info("Bankaccount wurde im Backend eröffnet %s", Bankaccoount.User)
