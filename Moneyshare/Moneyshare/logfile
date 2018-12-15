@@ -53,3 +53,11 @@
 [15/Dec/2018 16:38:01] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10f16c7f0>
 [15/Dec/2018 16:38:23] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10a455828>
 [15/Dec/2018 16:38:45] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10659f860>
+[15/Dec/2018 16:40:41] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x108db27f0>
+[15/Dec/2018 16:44:13] INFO [bankaccount.models:32] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10d4ccb38>
+[15/Dec/2018 16:44:57] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x103340b70>
+[15/Dec/2018 16:46:25] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x1026e9b38>
+[15/Dec/2018 16:46:33] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10cec3780>
+[15/Dec/2018 16:46:38] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10b480828>
+[15/Dec/2018 16:46:40] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10a571860>
+[15/Dec/2018 16:46:40] INFO [bankaccount.models:32] Bankaccount wurde im Backend eröffnet <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x1048c4860>

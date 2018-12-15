@@ -22,7 +22,11 @@ class Bankaccoount(models.Model):
         permissions = (
             ("can_see_bankaccount", "View a bancaccount"),
             ("can_change_bankaccount", "Can change a bankaccount"),
-            ("can_delete_bankaccount", "Can delete a bankaccount")
+            ("can_delete_bankaccount", "Can delete a bankaccount"),
+            ("can_abheben", "Kann ein Abheben von einem Bankaccount"),
+            ("can_einzahlen", "Kann ein Abheben von einem Bankaccount"),
+            ("can_bankeröffnung", "Kann ein Bankacccount eröffnen"),
+            ("can_payafriend", "Kann ein Geld an einen Freund senden")
         )
         
-logger.info("The value of var is %s", Bankaccoount.User)
+logger.info("Bankaccount wurde im Backend eröffnet %s", Bankaccoount.User)
