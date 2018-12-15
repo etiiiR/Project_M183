@@ -19,10 +19,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from .forms import sendmoneytofriend
 from django.views.generic.edit import FormView
+from django.views.generic import TemplateView
 
-@method_decorator(login_required, name='dispatch')
-class abheben(PermissionRequiredMixin, ListView):
-    permission_required = 'bankaccount.can_see_bankaccount'
+class abheben(TemplateView):
+    def get(self, request):
+        if request.user.is_authenticated():
+            username = request.user.username
+    
 
 
 
@@ -63,7 +66,7 @@ class SignUp(PermissionRequiredMixin, generic.CreateView):
     template_name = 'signup.html'
 
 @method_decorator(login_required, name='dispatch')
-class Friendspay(PermissionRequiredMixin, FormView):
+class Friendspay(PermissionRequiredMixin,  FormView):
     permission_required = 'bankaccount.can_bankeröffnung' 
     form_class = sendmoneytofriend
     success_url = '/app/'
@@ -72,5 +75,6 @@ class Friendspay(PermissionRequiredMixin, FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        form.send_email()
+        form.sendmoney()
         return super().form_valid(form)
+
