@@ -1,0 +1,55 @@
+[10/Dec/2018 14:56:54] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 14:58:00] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 14:58:00] INFO [bankaccount.views:23] The value of var is bankaccount.can_see_bankaccount
+[10/Dec/2018 14:59:50] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 14:59:50] INFO [bankaccount.views:23] The value of var is <class 'django.contrib.auth.mixins.PermissionRequiredMixin'>
+[10/Dec/2018 15:00:34] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:00:45] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:00:45] INFO [bankaccount.views:28] The value of var is <QuerySet [<Bankaccoount: Bankaccoount object (1)>, <Bankaccoount: Bankaccoount object (2)>, <Bankaccoount: Bankaccoount object (3)>]>
+[10/Dec/2018 15:01:22] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:01:22] INFO [bankaccount.views:28] The value of var is <QuerySet [<Bankaccoount: Bankaccoount object (1)>, <Bankaccoount: Bankaccoount object (2)>, <Bankaccoount: Bankaccoount object (3)>]>
+[10/Dec/2018 15:04:08] INFO [bankaccount.models:25] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x102c4ba20>
+[10/Dec/2018 15:04:08] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:04:08] INFO [bankaccount.views:28] The value of var is <QuerySet [<Bankaccoount: Bankaccoount object (1)>, <Bankaccoount: Bankaccoount object (2)>, <Bankaccoount: Bankaccoount object (3)>]>
+[10/Dec/2018 15:05:54] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10436db00>
+[10/Dec/2018 15:05:54] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:06:19] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x11113bac8>
+[10/Dec/2018 15:06:19] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:08:46] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10d4adb00>
+[10/Dec/2018 15:08:47] WARNING [bankaccount.views:18] Your log message is here
+[10/Dec/2018 15:09:17] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10db0aac8>
+[10/Dec/2018 15:09:17] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:20:59] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10cfb17b8>
+[15/Dec/2018 16:20:59] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:21:16] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10bdc07f0>
+[15/Dec/2018 16:21:17] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:23:15] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10a1b67f0>
+[15/Dec/2018 16:23:15] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:23:33] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x1117087b8>
+[15/Dec/2018 16:23:38] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10c40d7b8>
+[15/Dec/2018 16:23:40] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x109e227b8>
+[15/Dec/2018 16:23:40] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:25:38] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10880c7f0>
+[15/Dec/2018 16:25:38] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:26:18] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x1098ed710>
+[15/Dec/2018 16:26:18] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:27:04] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10f4c87f0>
+[15/Dec/2018 16:27:04] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:28:22] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10fe1c7b8>
+[15/Dec/2018 16:28:22] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:28:35] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x101bd57b8>
+[15/Dec/2018 16:28:35] WARNING [bankaccount.views:18] Your log message is here
+[15/Dec/2018 16:34:28] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x109a52860>
+[15/Dec/2018 16:34:28] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10b8a37f0>
+[15/Dec/2018 16:34:42] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x106fc2828>
+[15/Dec/2018 16:35:21] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10d02b860>
+[15/Dec/2018 16:35:22] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x1106fd828>
+[15/Dec/2018 16:35:33] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x104738860>
+[15/Dec/2018 16:35:37] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x102993780>
+[15/Dec/2018 16:35:43] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x110de1860>
+[15/Dec/2018 16:36:14] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10d68a828>
+[15/Dec/2018 16:37:23] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x109699828>
+[15/Dec/2018 16:37:32] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10aeb1828>
+[15/Dec/2018 16:38:01] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10f16c7f0>
+[15/Dec/2018 16:38:23] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10a455828>
+[15/Dec/2018 16:38:45] INFO [bankaccount.models:28] The value of var is <django.db.models.fields.related_descriptors.ForwardManyToOneDescriptor object at 0x10659f860>
