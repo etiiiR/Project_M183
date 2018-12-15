@@ -1,10 +1,28 @@
 # Create your models here.
-from django.db import models
-from django.conf import settings
 import datetime
 import logging
 
+import django.core.validators
+from django.conf import settings
+from django.core.validators import MinValueValidator
+from django.db import models
+
+
 logger = logging.getLogger(__name__)
+
+
+
+class Antrag(models.Model):
+    Vorname = models.CharField(max_length=60)
+    Nachname = models.CharField(max_length=60)
+    User = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        
+    )
+
+    Antragswunsch = models.CharField(max_length=60)
+    Kontotyp = models.CharField(max_length=60)
 
 
 class Bankaccoount(models.Model):
@@ -15,9 +33,8 @@ class Bankaccoount(models.Model):
     )
 
     Money = models.IntegerField(default=1)
-    def __str__(self):
-        return self.Money
     date = models.DateField(("Date"), default=datetime.date.today)
+    
     class Meta:
         permissions = (
             ("can_see_bankaccount", "View a bancaccount"),
@@ -28,3 +45,10 @@ class Bankaccoount(models.Model):
             ("can_bankeröffnung", "Kann ein Bankacccount eröffnen"),
             ("can_payafriend", "Kann ein Geld an einen Freund senden")
         )
+
+
+
+class Transaktion(models.Model):
+    Money_to = models.ForeignKey(Bankaccoount, related_name="destination_account", on_delete=models.CASCADE)
+    Value = models.PositiveIntegerField(default=1)
+    Money_from = models.ForeignKey(Bankaccoount, related_name="source_account", on_delete=models.CASCADE )

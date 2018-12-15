@@ -16,6 +16,13 @@
         <td>{{ user.id }}</td>
         <td>{{ user.Money }}</td>
         <td>{{ user.User }}</td>
+        <td> 
+  {% buttons %}
+    <button type="submit" class="btn btn-danger">
+       Geld abheben
+    </button>
+  {% endbuttons %}
+        </td>
       </tr>
     {% endfor %}
   </tbody>

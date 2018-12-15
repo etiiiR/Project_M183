@@ -2,8 +2,12 @@ from lib2to3.fixes.fix_input import context
 import logging
 
 logger = logging.getLogger(__name__)
-from .models import Bankaccoount
+from fnmatch import filter
+
+from .forms import sendmoneytofriend, FolderForm
+from .models import Bankaccoount, Transaktion
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Permission, User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -11,20 +15,23 @@ from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views import generic
+from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView, DeleteView, FormView, \
+    UpdateView
 from django.views.generic.list import ListView
 from ipware import get_client_ip
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
-from django.views import generic
-from .forms import sendmoneytofriend
-from django.views.generic.edit import FormView
-from django.views.generic import TemplateView
 
-class abheben(TemplateView):
-    def get(self, request):
-        if request.user.is_authenticated():
-            username = request.user.username
+
+class abheben(ListView):
+    model = Bankaccoount
+    template_name = 'user_abheben.html'
+    context_object_name = 'all_bancaccounts_user'
+
+    def get_queryset(self):
+        return Bankaccoount.objects.filter(User_id=self.kwargs['pk'])
+
+
     
 
 
@@ -65,16 +72,12 @@ class SignUp(PermissionRequiredMixin, generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
+
 @method_decorator(login_required, name='dispatch')
-class Friendspay(PermissionRequiredMixin,  FormView):
-    permission_required = 'bankaccount.can_bankeröffnung' 
-    form_class = sendmoneytofriend
-    success_url = '/app/'
-    template_name = 'user_friendspay.html'
+class Friendspay(CreateView):
+    form_class = FolderForm
 
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.sendmoney()
-        return super().form_valid(form)
-
+    def get_form_kwargs(self):
+        kwargs = super(Friendspay, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
