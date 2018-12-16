@@ -45,10 +45,14 @@ class Bankaccoount(models.Model):
             ("can_bankeröffnung", "Kann ein Bankacccount eröffnen"),
             ("can_payafriend", "Kann ein Geld an einen Freund senden")
         )
-
+    def __str__(self):
+        return 'Bankaccount: ' + str(self.User) + " " + str(self.id)
 
 
 class Transaktion(models.Model):
     Money_to = models.ForeignKey(Bankaccoount, related_name="destination_account", on_delete=models.CASCADE)
     Value = models.PositiveIntegerField(default=1)
     Money_from = models.ForeignKey(Bankaccoount, related_name="source_account", on_delete=models.CASCADE )
+    
+    def __str__(self):
+        return self.Money_from.User.username + " " + str(self.Money_from.id) +  " to " + self.Money_to.User.username + " " + str(self.Money_to.id)

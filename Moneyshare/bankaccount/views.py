@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 from fnmatch import filter
-
+from django.core.exceptions import ValidationError
 from .forms import sendmoneytofriend, FolderForm
 from .models import Bankaccoount, Transaktion
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -21,7 +21,7 @@ from django.views.generic.edit import CreateView, DeleteView, FormView, \
     UpdateView
 from django.views.generic.list import ListView
 from ipware import get_client_ip
-
+from django.http import Http404 
 
 class abheben(ListView):
     model = Bankaccoount
@@ -76,8 +76,39 @@ class SignUp(PermissionRequiredMixin, generic.CreateView):
 @method_decorator(login_required, name='dispatch')
 class Friendspay(CreateView):
     form_class = FolderForm
+    accounts = Bankaccoount.objects.all().values('id')
+    #list = []
+    #for account in accounts:
+    #    list.append(account)
+    #
+    #accounts = Bankaccoount.objects.all().values('Money')
+    #for account in accounts:
+    #    list.append(account)
+#
+    #print(list)
 
     def get_form_kwargs(self):
         kwargs = super(Friendspay, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+    
+    def form_valid(self, form):
+        value = form.data['Value']
+        int_value = int(value)
+        Account = Bankaccoount.objects.get(id=form.data['Money_from'])
+        Account_2 = Bankaccoount.objects.get(id=form.data['Money_to'])
+        if(Account == Account_2):
+            raise ValidationError('You cannot depostit and withdraw with the same Bankaccount')
+        else:
+            if (str(Account.Money) >= str(form.data['Value'])):
+                Bankaccoount.objects.filter(id=form.data['Money_from']).update(Money = Account.Money - int_value)
+                konto_gezahlt = Bankaccoount.objects.filter(id=form.data['Money_to']).update(Money= Account_2.Money + int_value)
+            else:
+                raise ValidationError('Invalid value')
+                logger.info("Inputvalidierung error %s", Account.Money)
+                logger.info("Inputvalidierung error %s", Account_2.Money)
+                logger.info("Inputvalidierung error %s", value)
+        form.sendtransaktion()
+        return super().form_valid(form)
+    # do something with self.object
+    # remember the import: from django.http import HttpResponseRedirect
