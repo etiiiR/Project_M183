@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 from fnmatch import filter
 from django.core.exceptions import ValidationError
-from .forms import sendmoneytofriend, FolderForm
+from .forms import FolderForm
 from .models import Bankaccoount, Transaktion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
@@ -62,7 +62,7 @@ class UserchangeListView(PermissionRequiredMixin, ListView):
 class AccountCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'bankaccount.can_change_bankaccount' 
     model = Bankaccoount
-    fields = ['Money', 'User']
+    fields = ['balance', 'User']
     logger.info("Account Created", fields)
 
 @method_decorator(login_required, name='dispatch')
@@ -77,15 +77,6 @@ class SignUp(PermissionRequiredMixin, generic.CreateView):
 class Friendspay(CreateView):
     form_class = FolderForm
     accounts = Bankaccoount.objects.all().values('id')
-    #list = []
-    #for account in accounts:
-    #    list.append(account)
-    #
-    #accounts = Bankaccoount.objects.all().values('Money')
-    #for account in accounts:
-    #    list.append(account)
-#
-    #print(list)
 
     def get_form_kwargs(self):
         kwargs = super(Friendspay, self).get_form_kwargs()
@@ -93,22 +84,23 @@ class Friendspay(CreateView):
         return kwargs
     
     def form_valid(self, form):
-        value = form.data['Value']
-        int_value = int(value)
-        Account = Bankaccoount.objects.get(id=form.data['Money_from'])
-        Account_2 = Bankaccoount.objects.get(id=form.data['Money_to'])
-        if(Account == Account_2):
-            raise ValidationError('You cannot depostit and withdraw with the same Bankaccount')
-        else:
-            if (str(Account.Money) >= str(form.data['Value'])):
-                Bankaccoount.objects.filter(id=form.data['Money_from']).update(Money = Account.Money - int_value)
-                konto_gezahlt = Bankaccoount.objects.filter(id=form.data['Money_to']).update(Money= Account_2.Money + int_value)
+        if form.is_valid():
+            data = form.cleaned_data
+            my_form_obj = form.save(commit=True)
+            #use dir()
+            amount = my_form_obj.Value.amount
+            id_money_from = my_form_obj.Money_from_id
+            id_money_to = my_form_obj.Money_to_id
+            account_from = Bankaccoount.objects.get(id=id_money_from)
+            account_to = Bankaccoount.objects.get(id=id_money_to)
+            print(dir(account_from.balance))
+
+            if(id_money_from == id_money_to):
+                raise ValidationError('You cannot depostit and withdraw with the same Bankaccount')
             else:
-                raise ValidationError('Invalid value')
-                logger.info("Inputvalidierung error %s", Account.Money)
-                logger.info("Inputvalidierung error %s", Account_2.Money)
-                logger.info("Inputvalidierung error %s", value)
-        form.sendtransaktion()
+                if (account_from.balance.amount >= amount ):
+                    konto_bezahlt = Bankaccoount.objects.filter(id=id_money_from).update(balance = account_from.balance.amount - amount)
+                    konto_gezahlt = Bankaccoount.objects.filter(id=id_money_to).update(balance= account_to.balance.amount + amount)
+                else:
+                    raise ValidationError('Invalid value')
         return super().form_valid(form)
-    # do something with self.object
-    # remember the import: from django.http import HttpResponseRedirect

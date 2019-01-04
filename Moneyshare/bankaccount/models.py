@@ -6,6 +6,7 @@ import django.core.validators
 from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
+from djmoney.models.fields import MoneyField
 
 
 logger = logging.getLogger(__name__)
@@ -32,7 +33,7 @@ class Bankaccoount(models.Model):
         
     )
 
-    Money = models.IntegerField(default=1)
+    balance = MoneyField(max_digits=14, decimal_places=2, default_currency='CHF')
     date = models.DateField(("Date"), default=datetime.date.today)
     
     class Meta:
@@ -51,7 +52,7 @@ class Bankaccoount(models.Model):
 
 class Transaktion(models.Model):
     Money_to = models.ForeignKey(Bankaccoount, related_name="destination_account", on_delete=models.CASCADE)
-    Value = models.PositiveIntegerField(default=1)
+    Value = MoneyField(max_digits=14, decimal_places=2, default_currency='CHF')
     Money_from = models.ForeignKey(Bankaccoount, related_name="source_account", on_delete=models.CASCADE )
     
     def __str__(self):

@@ -6,15 +6,15 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Money</th>
-      <th>User</th>
+      <th>balance</th>
+      <th>Users</th>
     </tr>
   </thead>
   <tbody>
     {% for user in object_list %}
       <tr>
         <td>{{ user.id }}</td>
-        <td>{{ user.Money }}</td>
+        <td>{{ user.balance }}</td>
         <td>{{ user.User }}</td>
       </tr>
     {% endfor %}
