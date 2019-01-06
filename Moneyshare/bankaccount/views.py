@@ -1,8 +1,6 @@
 from lib2to3.fixes.fix_input import context
 import logging
-
-logger = logging.getLogger(__name__)
-from fnmatch import filter
+#from fnmatch import filter
 from django.core.exceptions import ValidationError
 from .forms import FolderForm
 from .models import Bankaccoount, Transaktion
@@ -12,16 +10,16 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Permission, User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.context_processors import request
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, FormView, \
     UpdateView
 from django.views.generic.list import ListView
-from ipware import get_client_ip
 from django.http import Http404 
+logger = logging.getLogger(__name__)
 
 class abheben(ListView):
     model = Bankaccoount
@@ -84,6 +82,7 @@ class Friendspay(CreateView):
         return kwargs
     
     def form_valid(self, form):
+        print("ssss")
         if form.is_valid():
             data = form.cleaned_data
             my_form_obj = form.save(commit=True)
@@ -93,14 +92,15 @@ class Friendspay(CreateView):
             id_money_to = my_form_obj.Money_to_id
             account_from = Bankaccoount.objects.get(id=id_money_from)
             account_to = Bankaccoount.objects.get(id=id_money_to)
-            print(dir(account_from.balance))
 
             if(id_money_from == id_money_to):
-                raise ValidationError('You cannot depostit and withdraw with the same Bankaccount')
+                logger.error(" Error Account %s %s", account_from, account_to)
+                return HttpResponseRedirect('same_account/')
             else:
                 if (account_from.balance.amount >= amount ):
                     konto_bezahlt = Bankaccoount.objects.filter(id=id_money_from).update(balance = account_from.balance.amount - amount)
                     konto_gezahlt = Bankaccoount.objects.filter(id=id_money_to).update(balance= account_to.balance.amount + amount)
                 else:
-                    raise ValidationError('Invalid value')
+                    logger.error(" Error Balance %s", account_from)
+                    return HttpResponseRedirect('error_blance/')
         return super().form_valid(form)

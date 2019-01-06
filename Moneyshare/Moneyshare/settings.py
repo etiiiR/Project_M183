@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ''.join([random.SystemRandom().choice("{}{}{}".format(string.ascii_letters, string.digits, string.punctuation)) for i in range(50)])
 print(SECRET_KEY)
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -152,9 +152,17 @@ LOGGING = {
             'class':'logging.NullHandler',
         },
         'logfile': {
-            'level':'DEBUG',
+            'level':'ERROR',
             'class':'logging.handlers.RotatingFileHandler',
             'filename': SITE_ROOT + "/logfile",
+            'maxBytes': 500000000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
+        'debug': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': SITE_ROOT + "/debug",
             'maxBytes': 500000000,
             'backupCount': 2,
             'formatter': 'standard',
@@ -167,17 +175,27 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['console'],
+            'handlers':['debug'],
             'propagate': True,
             'level':'WARN',
         },
         'django.db.backends': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['debug'],
             'level': 'DEBUG',
             'propagate': False,
         },
+        'django.request': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'bankaccount': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['logfile'],
             'level': 'DEBUG',
         },
     }
