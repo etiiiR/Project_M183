@@ -2,7 +2,7 @@ from lib2to3.fixes.fix_input import context
 import logging
 #from fnmatch import filter
 from django.core.exceptions import ValidationError
-from .forms import FolderForm
+from .forms import FolderForm, AntragsForm
 from .models import Bankaccoount, Transaktion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
@@ -19,6 +19,7 @@ from django.views.generic.edit import CreateView, DeleteView, FormView, \
     UpdateView
 from django.views.generic.list import ListView
 from django.http import Http404 
+from django.contrib.auth.models import User
 logger = logging.getLogger(__name__)
 
 class abheben(ListView):
@@ -104,3 +105,14 @@ class Friendspay(CreateView):
                     logger.error(" Error Balance %s", account_from)
                     return HttpResponseRedirect('error_blance/')
         return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class RequestforAccount(CreateView):
+    form_class = AntragsForm
+    accounts = User.objects.all().values('id')
+
+    def get_form_kwargs(self):
+        kwargs = super(RequestforAccount, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs

@@ -25,6 +25,11 @@ class Antrag(models.Model):
     Antragswunsch = models.CharField(max_length=60)
     Kontotyp = models.CharField(max_length=60)
 
+    class Meta:
+        permissions = (
+            ("can_add_Antrag", "Kann einen Antrag erstellen"),
+            ("can_see_Antrag", "Kann einen Antrag sehen"),
+        )
 
 class Bankaccoount(models.Model):
     User = models.ForeignKey(
@@ -42,7 +47,7 @@ class Bankaccoount(models.Model):
             ("can_change_bankaccount", "Can change a bankaccount"),
             ("can_delete_bankaccount", "Can delete a bankaccount"),
             ("can_abheben", "Kann ein Abheben von einem Bankaccount"),
-            ("can_einzahlen", "Kann ein Abheben von einem Bankaccount"),
+            ("can_einzahlen", "Kann ein Einzahlen an einem Bankaccount"),
             ("can_bankeröffnung", "Kann ein Bankacccount eröffnen"),
             ("can_payafriend", "Kann ein Geld an einen Freund senden")
         )
